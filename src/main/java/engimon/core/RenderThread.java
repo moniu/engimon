@@ -1,18 +1,16 @@
 package engimon.core;
 
-@SuppressWarnings("InfiniteLoopStatement")
-public class RenderThread implements Runnable {
-    private final Game game;
+import lombok.NoArgsConstructor;
 
-    public RenderThread(Game game) {
-        this.game = game;
-    }
+@SuppressWarnings("InfiniteLoopStatement")
+@NoArgsConstructor
+public class RenderThread implements Runnable {
 
     @Override
     public void run() {
         while (true) {
             try {
-                game.getRenderEngine().render();
+                Game.instance.getRenderEngine().render();
             }
             catch (Exception e) {
                 //ignore

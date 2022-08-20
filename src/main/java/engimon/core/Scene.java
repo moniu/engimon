@@ -18,8 +18,7 @@ public class Scene extends MetaObject {
     protected Camera camera;
     protected Color backgroundColor;
 
-    public Scene(Game game) {
-        super(game);
+    public Scene() {
         graphicObjects = new ArrayList<>();
         physicalObjects = new ArrayList<>();
         camera = new Camera(0.0, 0.0, 1.0);

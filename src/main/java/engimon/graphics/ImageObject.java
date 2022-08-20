@@ -1,5 +1,6 @@
 package engimon.graphics;
 
+import engimon.core.Game;
 import engimon.core.Scene;
 
 import java.awt.*;
@@ -11,7 +12,7 @@ public class ImageObject extends GraphicObject {
 
     public ImageObject(Scene scene, String imageName) {
         super(scene);
-        image = getGame().getImagesManager().loadImage(imageName);
+        image = Game.instance.getImagesManager().loadImage(imageName);
     }
 
     @Override

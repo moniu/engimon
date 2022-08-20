@@ -1,5 +1,6 @@
 package engimon.physics.objects;
 
+import engimon.core.Game;
 import engimon.core.Scene;
 import engimon.core.objects.GameObject;
 import engimon.physics.hitbox.Hitbox;
@@ -68,7 +69,7 @@ public class PhysicalObject extends GameObject {
         this.speedX += (this.gravityX * this.weight * deltaTime);
         this.speedY += (this.gravityY * this.weight * deltaTime);
 
-        for (PhysicalObject o : getGame().getScene().getPhysicalObjects()) {
+        for (PhysicalObject o : Game.instance.getScene().getPhysicalObjects()) {
             if (this.getHitbox().checkCollision(o.getHitbox())) {
                 this.collideWithObject(o);
             }

@@ -33,6 +33,7 @@ public class Game extends Canvas {
 //    } TODO: Document starting the game instance
 
     protected Game(int width, int height, String name) {
+        instance = this;
         gameWidth = width;
         gameHeight = height;
 
@@ -47,18 +48,14 @@ public class Game extends Canvas {
         this.addKeyListener(this.keyHandler);
 
         window = new Window(width, height, name, this);
-        renderEngine = new RenderEngine(this);
-        scene = new Scene(this);
+        renderEngine = new RenderEngine();
+        scene = new Scene();
         lastFPS = 0;
     }
 
-    void initialize(int width, int height, String name) {
-        instance = new Game(width, height, name);
-    }
-
     public synchronized void start() {
-        tickThread = new Thread(new TickThread(this), "GameTickThread");
-        renderThread = new Thread(new RenderThread(this), "GameRenderThread");
+        tickThread = new Thread(new TickThread(), "GameTickThread");
+        renderThread = new Thread(new RenderThread(), "GameRenderThread");
         tickThread.start();
         renderThread.start();
     }

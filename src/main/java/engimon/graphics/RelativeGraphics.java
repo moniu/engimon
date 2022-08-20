@@ -1,5 +1,6 @@
 package engimon.graphics;
 
+import engimon.core.Game;
 import engimon.core.Scene;
 
 import java.awt.*;
@@ -189,13 +190,13 @@ public class RelativeGraphics {
     private int translateX(double x) {
         Camera camera = scene.getCamera();
         double relativeX = x - camera.getX();
-        relativeX += scene.getGame().getGameWidth() / 2.0 / camera.getZoom();
+        relativeX += Game.instance.getGameWidth() / 2.0 / camera.getZoom();
         return (int) relativeX;
     }
 
     private int translateY(double y) {
         Camera camera = scene.getCamera();
-        return (int) (y - camera.getY() + scene.getGame().getGameHeight() / 2.0 / camera.getZoom());
+        return (int) (y - camera.getY() + Game.instance.getGameHeight() / 2.0 / camera.getZoom());
 
     }
 

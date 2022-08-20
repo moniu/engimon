@@ -1,6 +1,5 @@
 package engimon.core.objects;
 
-import engimon.core.Game;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,10 +9,8 @@ import java.util.ArrayList;
 @Setter
 public abstract class MetaObject {
     private ArrayList<GameObject> childrenGameObjects;
-    private Game game;
 
-    public MetaObject(Game game) {
-        this.game = game;
+    public MetaObject() {
         childrenGameObjects = new ArrayList<>();
     }
 

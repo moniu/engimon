@@ -13,7 +13,7 @@ public class GameObject extends MetaObject {
     private double localY;
 
     public GameObject(Scene scene) {
-        super(scene.getGame());
+        super();
         this.scene = scene;
         this.localX = 0.0;
         this.localY = 0.0;

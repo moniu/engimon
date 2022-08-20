@@ -1,12 +1,10 @@
 package engimon.core;
 
-@SuppressWarnings("InfiniteLoopStatement")
-public class TickThread implements Runnable {
-    private final Game game;
+import lombok.NoArgsConstructor;
 
-    public TickThread(Game game) {
-        this.game = game;
-    }
+@SuppressWarnings("InfiniteLoopStatement")
+@NoArgsConstructor
+public class TickThread implements Runnable {
 
     @Override
     public synchronized void run() {
@@ -21,9 +19,9 @@ public class TickThread implements Runnable {
             secondCounter += deltaTime;
             lastTime = now;
             frameCounter++;
-            game.getScene().tick(deltaTime);
+            Game.instance.getScene().tick(deltaTime);
             if (secondCounter >= 1_000_000_000) {
-                game.setLastFPS(frameCounter);
+                Game.instance.setLastFPS(frameCounter);
                 secondCounter = 0;
                 frameCounter = 0;
             }
