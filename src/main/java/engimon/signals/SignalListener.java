@@ -1,6 +1,6 @@
 package engimon.signals;
 
 @FunctionalInterface
-public interface SignalListener<SignalType extends Signal> {
-    void invoke(SignalType signal);
+public interface SignalListener {
+    void invoke(Signal signal);
 }

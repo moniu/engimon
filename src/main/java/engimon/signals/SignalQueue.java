@@ -5,7 +5,7 @@ import java.util.*;
 public class SignalQueue {
     public static SignalQueue INSTANCE;
     private Queue<Signal> signalQueue;
-    private Map<Class<Signal>, List<SignalListener<Signal>>> listenersRegistry;
+    private Map<Class<? extends Signal>, List<SignalListener>> listenersRegistry;
 
     public SignalQueue() {
         if (INSTANCE != null) {
@@ -16,26 +16,26 @@ public class SignalQueue {
         listenersRegistry = new HashMap<>();
     }
 
-    public void registerListener(Class<Signal> eventClass, SignalListener<Signal> signalListener) {
+    public synchronized void registerListener(Class<? extends Signal> eventClass, SignalListener signalListener) {
         if (!listenersRegistry.containsKey(eventClass)) {
-            List<SignalListener<Signal>> signalListeners = new ArrayList<>();
+            List<SignalListener> signalListeners = new ArrayList<>();
             listenersRegistry.put(eventClass, signalListeners);
         }
-        List<SignalListener<Signal>> signalListeners = listenersRegistry.get(eventClass);
+        List<SignalListener> signalListeners = listenersRegistry.get(eventClass);
         signalListeners.add(signalListener);
     }
 
-    public void addToQueue(Signal signal) {
+    public synchronized void addToQueue(Signal signal) {
         signalQueue.add(signal);
     }
 
-    public void handleFirstInQueue() {
+    public synchronized void handleFirstInQueue() {
         Signal signal = signalQueue.poll();
         if (signal == null) {
             return;
         }
-        List<SignalListener<Signal>> signalListeners = listenersRegistry.get(signal.getClass());
-        for (SignalListener<Signal> signalListener : signalListeners) {
+        List<SignalListener> signalListeners = listenersRegistry.get(signal.getClass());
+        for (SignalListener signalListener : signalListeners) {
             signalListener.invoke(signal);
         }
     }

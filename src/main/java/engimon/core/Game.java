@@ -3,6 +3,7 @@ package engimon.core;
 import engimon.core.managers.ImagesManager;
 import engimon.core.managers.SoundManager;
 import engimon.graphics.RenderEngine;
+import engimon.signals.SignalQueue;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,12 +19,14 @@ public class Game extends Canvas {
     private Window window;
     private Thread tickThread;
     private Thread renderThread;
+    private Thread signalThread;
     private GameVariables gameVariables;
     private RenderEngine renderEngine;
     private Scene scene;
     private KeyHandler keyHandler;
     private ImagesManager imagesManager;
     private SoundManager soundManager;
+    private SignalQueue signalQueue;
 
     private int lastFPS;
 
@@ -39,6 +42,7 @@ public class Game extends Canvas {
 
         imagesManager = new ImagesManager();
         soundManager = new SoundManager();
+        signalQueue = new SignalQueue();
 
         gameVariables = new GameVariables();
         gameVariables.setWindowWidth(width);
@@ -56,8 +60,10 @@ public class Game extends Canvas {
     public synchronized void start() {
         tickThread = new Thread(new TickThread(), "GameTickThread");
         renderThread = new Thread(new RenderThread(), "GameRenderThread");
+        signalThread = new Thread(new SignalThread(), "GameSignalThread");
         tickThread.start();
         renderThread.start();
+        signalThread.start();
     }
 
     public void stop() {
