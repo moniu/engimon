@@ -1,9 +1,13 @@
 package engimon.graphics;
 
 import engimon.core.Scene;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashMap;
 
+@Getter
+@Setter
 public class AnimatedObject extends GraphicObject {
     private final HashMap<String, Animation> animations;
     private String currentAnimation;
@@ -29,19 +33,11 @@ public class AnimatedObject extends GraphicObject {
         this.currentAnimation = animation;
     }
 
-    public double getSizeX() {
-        return this.sizeX;
-    }
-
     public void setSizeX(double sizeX) {
         this.sizeX = sizeX;
         for (Animation a : animations.values()) {
             a.setSizeX(sizeX);
         }
-    }
-
-    public double getSizeY() {
-        return this.sizeY;
     }
 
     public void setSizeY(double sizeY) {

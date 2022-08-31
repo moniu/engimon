@@ -16,12 +16,13 @@ public class TickThread implements Runnable {
         while (true) {
             now = System.nanoTime();
             deltaTime = now - lastTime;
+            deltaTime *= Game.instance.getGameVariables().getDeltaScale();
             secondCounter += deltaTime;
             lastTime = now;
             frameCounter++;
-            Game.instance.getScene().tick(deltaTime);
+            Game.instance.getScene().tick(deltaTime / 1_000_000_000);
             if (secondCounter >= 1_000_000_000) {
-                Game.instance.setLastFPS(frameCounter);
+                Game.instance.setLastFPS((int) (frameCounter * Game.instance.getGameVariables().getDeltaScale()));
                 secondCounter = 0;
                 frameCounter = 0;
             }

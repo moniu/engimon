@@ -25,7 +25,7 @@ public class SquareGraphicObject extends GraphicObject {
     @Override
     public synchronized void render(RelativeGraphics relativeGraphics) {
         relativeGraphics.setColor(color);
-        if (this.getRelative()) {
+        if (this.isRelative()) {
             relativeGraphics.fillRect(this.getGlobalX() - sizeX / 2, this.getGlobalY() - sizeY / 2, sizeX, sizeY);
         }
         else {

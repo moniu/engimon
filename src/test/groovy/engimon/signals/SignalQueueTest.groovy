@@ -8,10 +8,10 @@ class SignalQueueTest extends Specification {
         new SignalQueue()
         TestSignal signal = new TestSignal()
         Boolean listenerHasBeenInvoked = false
-        SignalQueue.INSTANCE.registerListener(TestSignal, ($event) -> { listenerHasBeenInvoked = true })
+        SignalQueue.instance().registerListener(TestSignal, ($event) -> { listenerHasBeenInvoked = true })
         when:
-        SignalQueue.INSTANCE.addToQueue(signal)
-        SignalQueue.INSTANCE.handleFirstInQueue()
+        SignalQueue.instance().addToQueue(signal)
+        SignalQueue.instance().handleFirstInQueue()
         then:
         listenerHasBeenInvoked
     }
@@ -23,11 +23,11 @@ class SignalQueueTest extends Specification {
         Signal signal2 = new TestSignal2()
         Boolean listenerHasBeenInvoked = false
         Boolean otherListenerHasBeenInvoked = false
-        SignalQueue.INSTANCE.registerListener(TestSignal, (TestSignal dudu) -> listenerHasBeenInvoked = true)
-        SignalQueue.INSTANCE.registerListener(TestSignal2, ($signal) -> otherListenerHasBeenInvoked = true)
+        SignalQueue.instance().registerListener(TestSignal, (TestSignal dudu) -> listenerHasBeenInvoked = true)
+        SignalQueue.instance().registerListener(TestSignal2, ($signal) -> otherListenerHasBeenInvoked = true)
         when:
-        SignalQueue.INSTANCE.addToQueue(signal2)
-        SignalQueue.INSTANCE.handleFirstInQueue()
+        SignalQueue.instance().addToQueue(signal2)
+        SignalQueue.instance().handleFirstInQueue()
         then:
         !listenerHasBeenInvoked
         otherListenerHasBeenInvoked

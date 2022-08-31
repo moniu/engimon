@@ -22,7 +22,7 @@ public class Animation extends GraphicObject {
         super(scene);
         images = new ArrayList<>();
         frameTime = 0;
-        this.frameLength = frameLength * 1_000_000_000;
+        this.frameLength = frameLength;
         this.frames = filenames.length;
 
         ImageObject imageObject;

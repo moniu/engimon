@@ -2,6 +2,8 @@ package engimon.physics.hitbox;
 
 import engimon.core.Scene;
 import engimon.core.objects.GameObject;
+import engimon.physics.collisions.SATCollisionDetection;
+import engimon.physics.objects.CollisionPositionAndForce;
 import engimon.physics.objects.PhysicalObject;
 import engimon.physics.signals.HitboxCollisionSignal;
 import engimon.signals.SignalQueue;
@@ -35,12 +37,11 @@ public abstract class Hitbox extends GameObject {
 
     @Override
     public void customTick(double deltaTime) {
-        for (PhysicalObject physicalObject : getScene().getPhysicalObjects()) {
-            Hitbox otherHitbox = physicalObject.getHitbox();
-            if (checkCollision(otherHitbox)) {
-                SignalQueue.INSTANCE.addToQueue(
-                        new HitboxCollisionSignal(this, otherHitbox)
-                );
+        for (Hitbox other : getScene().getHitboxes()) {
+            CollisionPositionAndForce collisionPositionAndForce;
+            collisionPositionAndForce = SATCollisionDetection.calculateCollisionPositionAndForce(this, other);
+            if (collisionPositionAndForce != null) {
+                SignalQueue.addToQueue(new HitboxCollisionSignal(this, other, collisionPositionAndForce));
             }
         }
     }

@@ -37,7 +37,7 @@ public class Text extends GraphicObject {
 
         double fontWidth = relativeGraphics.getGraphics().getFontMetrics(font).stringWidth(text);
 
-        if (this.getRelative()) {
+        if (this.isRelative()) {
             relativeGraphics.drawString(
                     text,
                     getGlobalX() - fontWidth / 2,

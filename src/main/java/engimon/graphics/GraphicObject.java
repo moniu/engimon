@@ -2,7 +2,11 @@ package engimon.graphics;
 
 import engimon.core.Scene;
 import engimon.core.objects.GameObject;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public abstract class GraphicObject extends GameObject implements Comparable<GraphicObject> {
     protected int layer;
     protected boolean relative;
@@ -13,22 +17,6 @@ public abstract class GraphicObject extends GameObject implements Comparable<Gra
     }
 
     public abstract void render(RelativeGraphics relativeGraphics);
-
-    public final int getLayer() {
-        return this.layer;
-    }
-
-    public void setLayer(int layer) {
-        this.layer = layer;
-    }
-
-    public final boolean getRelative() {
-        return this.relative;
-    }
-
-    public void setRelative(boolean relative) {
-        this.relative = relative;
-    }
 
     @Override
     public int compareTo(GraphicObject o) {

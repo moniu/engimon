@@ -22,6 +22,10 @@ public abstract class MetaObject {
         return 0.0;
     }
 
+    public double getGlobalAngle() {
+        return 0.0;
+    }
+
     public final void addChild(GameObject child) {
         this.childrenGameObjects.add(child);
         child.setMaster(this);
@@ -45,4 +49,6 @@ public abstract class MetaObject {
 
     public void customTick(double deltaTime) {
     }
+
+
 }

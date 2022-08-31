@@ -70,6 +70,7 @@ public class Game extends Canvas {
         try {
             tickThread.join();
             renderThread.join();
+            signalThread.join();
         }
         catch (InterruptedException e) {
             e.printStackTrace();

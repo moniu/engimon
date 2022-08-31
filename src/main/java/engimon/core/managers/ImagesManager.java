@@ -1,20 +1,19 @@
 package engimon.core.managers;
 
 import javax.imageio.ImageIO;
-import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
 public class ImagesManager {
-    private final HashMap<String, Image> loadedImages;
+    private final HashMap<String, BufferedImage> loadedImages;
 
     public ImagesManager() {
         loadedImages = new HashMap<>();
     }
 
-    public Image loadImage(String filename) {
+    public BufferedImage loadImage(String filename) {
         if (loadedImages.containsKey(filename)) {
             return loadedImages.get(filename);
         }

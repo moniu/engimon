@@ -11,6 +11,8 @@ public class GameObject extends MetaObject {
     private Scene scene;
     private double localX;
     private double localY;
+    private String customName;
+    private double localAngle;
 
     public GameObject(Scene scene) {
         super();
@@ -47,6 +49,11 @@ public class GameObject extends MetaObject {
     @Override
     public final double getGlobalY() {
         return getMaster().getGlobalY() + this.localY;
+    }
+
+    @Override
+    public final double getGlobalAngle() {
+        return (getMaster().getGlobalAngle() + this.localAngle) % (2.0 * Math.PI);
     }
 
     public void customTick(double deltaTime) {
